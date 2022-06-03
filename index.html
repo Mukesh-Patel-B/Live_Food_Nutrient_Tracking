@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="/img/favicon/favi.png" type="image/x-icon">
+  <title>Nutrition Tracker</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<style>
+
+</style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-primary" style="margin: 0%">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="index.html"><img src="/img/jpeg.jpg" style="width: 3em;"> Nutrition Tracker</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+          </li>
+          
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              Nutrion table
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="Fruits.html">Fruits</a></li>
+              <li><a class="dropdown-item" href="Vegetable.html">Vegetables</a></li>
+            </ul>
+          </li>
+          <!-- <li class="nav-item">
+            <a class="nav-link" href="#abt">About</a>
+          </li> -->
+          <li class="nav-item">
+            <a class="nav-link disabled">Sign in</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="box">
+    <h1 style="text-align: center;">LIVE Nutrion Tracing:</h1>
+    <div
+      style="display:inline-block; border: solid red 2px; padding: 20px; margin: 20px; width: 30%; text-align: center;"
+      onclick="b()"> Protein: <div id="pr"></div>
+    </div>
+    <div
+      style="display:inline-block; border: solid red 2px; padding: 20px; margin: 20px; width: 30%; text-align: center;">
+      Fat: <div id="fa"></div>
+    </div>
+    <div
+      style="display:inline-block; border: solid red 2px; padding: 20px; margin: 20px; width: 30%; text-align: center; ">
+      Carbs: <div id="ca"></div>
+    </div>
+    <div
+      style="display:inline-block; border: solid red 2px; padding: 20px; margin: 20px; width: 30%; text-align: center;">
+      Calories: <div id="cal"></div>
+    </div>
+    <div
+      style="display:inline-block; border: solid red 2px; padding: 20px; margin: 20px; width: 30%; text-align: center;">
+      Vitamin: <div id="vit"></div>
+    </div>
+    <div
+      style="display:inline-block; border: solid red 2px; padding: 20px; margin: 20px; width: 30%; text-align: center;">
+      caIron: <div id="ir"></div>
+    </div>
+    
+</body>
+<script>
+  let file = "https://api.thingspeak.com/channels/1695584/feeds.json?results=1"
+  let a;
+
+  async function loadNames() {
+    const response = await fetch(file);
+    const names = await response.json();
+    var pr = names["feeds"][0]["field1"]!=null?names["feeds"][0]["field1"]:0;
+    var fa = names["feeds"][0]["field2"]!=null?names["feeds"][0]["field2"]:0;
+    var ca = names["feeds"][0]["field3"]!=null?names["feeds"][0]["field3"]:0;
+    var cal =  names["feeds"][0]["field4"]!=null?names["feeds"][0]["field4"]:0;
+    var vit = names["feeds"][0]["field5"]!=null?names["feeds"][0]["field5"]:0;
+    var ir =  names["feeds"][0]["field6"]!=null?names["feeds"][0]["field6"]:0;
+    document.getElementById("pr").innerHTML = pr;
+    document.getElementById("fa").innerHTML = fa;
+    document.getElementById("ca").innerHTML = ca;
+    document.getElementById("cal").innerHTML =cal;
+    document.getElementById("vit").innerHTML = vit;
+    document.getElementById("ir").innerHTML = ir;
+
+  }
+
+  var field1 = setInterval(loadNames, 1000);
+
+// function vi(){
+// fetch (file)
+// .then(x => x.json())
+// .then(y => a=y); 
+// }
+// function b(){
+// document.getElementById("pr").innerHTML = a["feeds"][1]["field1"]).then(y => document.getElementById("ca").innerHTML = y["feeds"][1]["field1"]);;
+// }
+// function mi(){
+// fetch (file)
+// .then(x => x.json())
+// .then(y => document.getElementById("pr").innerHTML = y["feeds"][1]["field1"]).then(y => document.getElementById("ca").innerHTML = y["feeds"][1]["field1"]);;
+// }
+// function pr(){
+// fetch (file)
+// .then(x => x.json())
+// .then(y => document.getElementById("pr").innerHTML = y["feeds"][1]["field1"]).then(y => document.getElementById("ca").innerHTML = y["feeds"][1]["field1"]);;
+// }
+
+// function fa(){
+// fetch (file)
+// .then(x => x.json())
+// .then(y => document.getElementById("pr").innerHTML = y["feeds"][1]["field1"]).then(y => document.getElementById("ca").innerHTML = y["feeds"][1]["field1"]);;
+// }
+
+// function wa(){
+// fetch (file)
+// .then(x => x.json())
+// .then(y => document.getElementById("pr").innerHTML = y["feeds"][1]["field1"]).then(y => document.getElementById("ca").innerHTML = y["feeds"][1]["field1"]);;
+// }
+// var fl;
+// function ca(){
+// fetch (file)
+// .then(x => x.json())
+// .then(y => document.getElementById("pr").innerHTML = y["feeds"][1]["field1"]).then(y => document.getElementById("ca").innerHTML = y["feeds"][1]["field1"]);;
+// }
+
+ // Will alert every second.
+//  var field2 = setInterval(mi, 1000); // Will alert every second.
+//  var field3 = setInterval(pr, 1000); // Will alert every second.
+//  var field4 = setInterval(fa, 1000); // Will alert every second.
+//  var field5 = setInterval(wa, 1000); // Will alert every second.
+//  var field6 = setInterval(ca, 1000); // Will alert every second.
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+</html>
